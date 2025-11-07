@@ -15,6 +15,12 @@ function getItem(label, key, icon, children) {
 const items = [
     getItem('Dashboard', '/dashboard', <PieChartOutlined />),
     getItem('Students', '/students', <FaSchool />),
+    getItem('Courses', '/courses', <FaSchool />),
+    getItem('Quizs', '/quiz', <FaSchool />),
+    getItem('Task', '/task', <FaSchool />),
+    getItem('Manage Jobs', '/manage-jobs', <FaSchool />),
+    getItem('Manage Schools', '/manage-schools', <FaSchool />),
+    getItem('Manage Law Firms', '/manage-law-firms', <FaSchool />),
 ];
 
 const DashboardLayout = () => {

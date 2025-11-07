@@ -8,6 +8,12 @@ import {
 import App from './App.jsx'
 import Dashboard from "./components/pages/Dashboard/Dashboard.jsx";
 import Students from "./components/pages/Students/Students.jsx";
+import Courses from "./components/pages/Courses/Courses.jsx";
+import Quizzs from "./components/pages/Quizzs/Quizzs.jsx";
+import Tasks from "./components/pages/Tasks/Tasks.jsx";
+import ManageJobs from "./components/pages/ManageJobs/ManageJobs.jsx";
+import ManageSchool from "./components/pages/ManageSchools/ManageSchool.jsx";
+import ManageLawFirms from "./components/pages/ManageLawFirms/ManageLawFirms.jsx";
 
 
 const router = createBrowserRouter([
@@ -22,6 +28,30 @@ const router = createBrowserRouter([
             {
                 path: "/students",
                 element: <Students />,
+            },
+            {
+                path:'/courses',
+                element: <Courses />,
+            },
+            {
+                path:'/quiz',
+                element: <Quizzs />
+            },
+            {
+                path:'/task',
+                element: <Tasks />,
+            },
+            {
+                path:'/manage-jobs',
+                element: <ManageJobs />,
+            },
+            {
+                path: '/manage-schools',
+                element: <ManageSchool />
+            },
+            {
+                path:'/manage-law-firms',
+                element: <ManageLawFirms />,
             }
         ]
     },
