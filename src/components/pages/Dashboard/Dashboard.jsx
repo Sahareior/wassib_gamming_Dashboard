@@ -100,7 +100,7 @@ const Dashboard = () => {
    const subtitle="Manage and view all students enrolled in your platform"
 
     return (
-        <div className='p-6 bg-gray-50 min-h-screen'>
+        <div className=' bg-gray-50 min-h-screen'>
             {/* Header Section */}
           <Headers title={"Dashboard"} subHeader={"Welcome back! Here's what's happening with your school."} />
 

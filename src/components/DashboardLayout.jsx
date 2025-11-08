@@ -21,6 +21,9 @@ const items = [
     getItem('Manage Jobs', '/manage-jobs', <FaSchool />),
     getItem('Manage Schools', '/manage-schools', <FaSchool />),
     getItem('Manage Law Firms', '/manage-law-firms', <FaSchool />),
+    getItem('Application Tracker', '/application-tacker', <FaSchool />),
+    getItem('Premium', '/premium', <FaSchool />),
+    getItem('Settings', '/settings', <FaSchool />),
 ];
 
 const DashboardLayout = () => {

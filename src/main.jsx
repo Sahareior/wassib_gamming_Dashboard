@@ -14,6 +14,9 @@ import Tasks from "./components/pages/Tasks/Tasks.jsx";
 import ManageJobs from "./components/pages/ManageJobs/ManageJobs.jsx";
 import ManageSchool from "./components/pages/ManageSchools/ManageSchool.jsx";
 import ManageLawFirms from "./components/pages/ManageLawFirms/ManageLawFirms.jsx";
+import ApplicationTracker from "./components/pages/ManageApplicationTracker/ApplicationTracker.jsx";
+import Premium from "./components/pages/Premium/Premium.jsx";
+import Settings from "./components/pages/Settings/Settings.jsx";
 
 
 const router = createBrowserRouter([
@@ -52,6 +55,18 @@ const router = createBrowserRouter([
             {
                 path:'/manage-law-firms',
                 element: <ManageLawFirms />,
+            },
+            {
+                path:'/application-tacker',
+                element: <ApplicationTracker />
+            },
+            {
+                path:'/premium',
+                element: <Premium />,
+            },
+            {
+                path:'/settings',
+                element: <Settings />,
             }
         ]
     },
