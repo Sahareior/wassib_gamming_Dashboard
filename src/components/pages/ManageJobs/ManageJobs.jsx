@@ -111,28 +111,31 @@ const JobsCard = ({ company, position, status, date, onDelete }) => {
     };
 
     return (
-        <div className="w-full bg-white shadow-sm rounded-2xl p-5 border border-gray-100 flex space-y-3 flex-col gap-5 hover:shadow-md transition-all duration-200">
+        <div className="w-full bg-white shadow-sm rounded-2xl p-5 border border-gray-100 flex space-y-3 flex-col gap-3 hover:shadow-md transition-all duration-200">
             {/* Top Section: Icon + Status */}
             <div className="flex justify-between items-center">
                 <div className="flex items-center gap-3">
                     <div className="p-3 bg-gray-100 rounded-full">
                         <FaBuilding size={26} className="text-gray-700" />
                     </div>
-                    <div>
-                        <p className="text-[16px] font-semibold text-gray-800">{company}</p>
-                        <p className="text-sm text-gray-600">{position}</p>
-                    </div>
+
                 </div>
                 <p className={`text-sm px-4 py-1 rounded-3xl font-medium ${statusColor}`}>
                     {status}
                 </p>
             </div>
 
-            {/* Date */}
-            <div className="flex items-center text-sm text-gray-500 gap-2">
-                <FaCalendar size={14} />
-                <span>{date}</span>
-            </div>
+<div className='space-y-3'>
+    {/* Date */}
+    <div>
+        <p className="text-[16px] popbold text-gray-800">{company}</p>
+        <p className="text-sm text-gray-600">{position}</p>
+    </div>
+    <div className="flex items-center text-sm text-gray-500 gap-2">
+        <FaCalendar size={14} />
+        <span>{date}</span>
+    </div>
+</div>
 
             {/* Action Buttons */}
             <div className="flex items-center justify-between gap-3">

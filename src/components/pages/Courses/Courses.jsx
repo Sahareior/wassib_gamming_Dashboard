@@ -177,7 +177,7 @@ const Courses = () => {
                 <Headers title={"Courses"} subHeader={"Manage all courses and learning materials"} />
                 <button
                     onClick={() => setOpen(true)}
-                    className="flex gap-2 items-center bg-yellow-400 hover:bg-yellow-500 py-3 rounded-xl px-6 shadow-sm hover:shadow-md transition-all duration-300 font-semibold text-gray-900 hover:scale-105"
+                    className="flex gap-2 items-center bg-[#FFFF00] hover:bg-yellow-500 py-3 rounded-xl px-6 shadow-sm hover:shadow-md transition-all duration-300 font-semibold text-gray-900 hover:scale-105"
                 >
                     <FaPlus className="text-sm" />
                     Create New Course

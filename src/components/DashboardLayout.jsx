@@ -5,6 +5,12 @@ import {
 import {Avatar, Breadcrumb, Layout, Menu, theme} from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
 import {FaSchool} from "react-icons/fa";
+import {RiDashboardHorizontalLine, RiShoppingBag4Line} from "react-icons/ri";
+import {GoLaw, GoPeople} from "react-icons/go";
+import {FiBookOpen} from "react-icons/fi";
+import {LuCrown, LuFileQuestion, LuNotepadText} from "react-icons/lu";
+import {BiTask} from "react-icons/bi";
+import {IoSettingsOutline} from "react-icons/io5";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -13,17 +19,17 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-    getItem('Dashboard', '/dashboard', <PieChartOutlined />),
-    getItem('Students', '/students', <FaSchool />),
-    getItem('Courses', '/courses', <FaSchool />),
-    getItem('Quizs', '/quiz', <FaSchool />),
-    getItem('Task', '/task', <FaSchool />),
-    getItem('Manage Jobs', '/manage-jobs', <FaSchool />),
-    getItem('Manage Schools', '/manage-schools', <FaSchool />),
-    getItem('Manage Law Firms', '/manage-law-firms', <FaSchool />),
-    getItem('Application Tracker', '/application-tacker', <FaSchool />),
-    getItem('Premium', '/premium', <FaSchool />),
-    getItem('Settings', '/settings', <FaSchool />),
+    getItem('Dashboard', '/dashboard', <RiDashboardHorizontalLine size={18} />),
+    getItem('Students', '/students', <GoPeople  size={18}/>),
+    getItem('Courses', '/courses', <FiBookOpen  size={18}/>),
+    getItem('Quizs', '/quiz', <LuFileQuestion size={18} />),
+    getItem('Task', '/task', <BiTask  size={18}/>),
+    getItem('Manage Jobs', '/manage-jobs', <RiShoppingBag4Line  size={18}/>),
+    getItem('Manage Schools', '/manage-schools', <FaSchool size={18} />),
+    getItem('Manage Law Firms', '/manage-law-firms', <GoLaw  size={18}/>),
+    getItem('Application Tracker', '/application-tacker', <LuNotepadText  size={18}/>),
+    getItem('Premium', '/premium', <LuCrown  size={18}/>),
+    getItem('Settings', '/settings', <IoSettingsOutline  size={18}/>),
 ];
 
 const DashboardLayout = () => {
@@ -39,13 +45,21 @@ const DashboardLayout = () => {
     };
 
     return (
-        <Layout style={{ minHeight: '100vh' }}>
-            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-                <div className="demo-logo-vertical mt-[10vh] bg-white" />
+        <Layout className='relative' style={{ minHeight: '100vh' }}>
+            <Sider className='w-[180%]' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+                <div className="demo-logo-vertical mt-[10vh] w-2/6 bg-white" />
+                <div className='flex items-center top-8 left-4 absolute gap-2'>
+                    <img className='w-[42px]'  src='/images/Container.png' />
+                    <div>
+                        <p className='popreg text-[16px]'>Aspiring</p>
+                        <p className='text-[#737373] text-[12px]'>Admin Panel</p>
+                    </div>
+                </div>
                 <Menu
                     theme="light"
                     mode="inline"
                     items={items}
+                    className='popreg text-[15px]'
                     onClick={handleMenuClick}
 
                 />
@@ -75,11 +89,11 @@ const DashboardLayout = () => {
                         </div>
                     </div>
                 </div>
-                <Content className='h-[80vh] overflow-y-auto' style={{ margin: '0 16px' }}>
+                <Content className='h-[80vh] overflow-y-auto' style={{ margin: '0 6px' }}>
 
                     <div
                         style={{
-                            padding: 24,
+                            padding: 14,
                             minHeight: 360,
 
                             borderRadius: borderRadiusLG,

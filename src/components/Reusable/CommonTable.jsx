@@ -68,7 +68,7 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
                 <input
                     type="text"
                     placeholder="Search students..."
-                    className="pl-9 pr-4 py-2 text-sm border w-[400px] border-gray-200 rounded-full focus:ring-1 focus:ring-blue-400 focus:outline-none"
+                    className="pl-9 pr-4 py-2 text-sm bg-[#F9F9F9] border w-[400px] border-gray-200 rounded-full focus:ring-1 focus:ring-blue-400 focus:outline-none"
                     value={searchTerm}
                     onChange={(e) => {
                         setSearchTerm(e.target.value);
@@ -98,7 +98,7 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
         {/* Table */}
         <table className="w-full text-sm text-left">
             <thead>
-            <tr className="text-gray-600">
+            <tr className="text-gray-600 popmed border-b-2 border-gray-200">
                 {columns.map((col) => (
                     <th key={col.accessor} className="py-4 px-4 font-semibold"> {/* Increased py-2 to py-4 */}
                         {col.header}

@@ -62,7 +62,7 @@ const SchoolCards = ({ name, type, date, status, onDelete, isSelected, onSelect 
         >
             {/* Top Section */}
             <div className="flex justify-between items-center">
-                <div className="p-3 bg-green-300 rounded-full">
+                <div className="p-3 bg-slate-100 rounded-full">
                     <FaBuilding size={26} className="text-gray-700" />
                 </div>
                 <div className="flex flex-col gap-3">

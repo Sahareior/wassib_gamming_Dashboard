@@ -123,7 +123,7 @@ const Premium = () => {
                         {/* Plan Header */}
                         <div>
                             <div className="flex justify-between items-center mb-4">
-                                <h3 className="text-lg font-semibold text-gray-800">{plan.name}</h3>
+                                <h3 className="text-lg popreg text-gray-800">{plan.name}</h3>
                                 {plan.isCurrent && (
                                     <span className="text-green-600 bg-green-100 text-xs font-medium px-3 py-1 rounded-full">
                     Current
@@ -131,11 +131,13 @@ const Premium = () => {
                                 )}
                             </div>
 
+                        <div className='flex gap-2 items-center'>
                             <p className="text-4xl font-bold text-gray-900 mb-1">{plan.price}</p>
-                            <p className="text-sm text-gray-500 mb-6">{plan.period}</p>
+                            <p className="text-sm text-gray-500 mb-1">{plan.period}</p>
+                        </div>
 
                             {/* Features */}
-                            <ul className="space-y-3">
+                            <ul className="space-y-3 mt-3">
                                 {plan.features.map((feature, i) => (
                                     <li key={i} className="flex items-center gap-2 text-gray-700">
                                         <MdOutlineDone className="text-green-500" />

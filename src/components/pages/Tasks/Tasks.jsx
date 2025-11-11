@@ -58,7 +58,7 @@ const TaskCards = ({ title, subject, status, date, submissions, totalSubmissions
             <div className="flex items-center justify-between mb-4">
                 <div>
                     <p className="text-lg font-semibold text-gray-800">{title}</p>
-                    <p className="text-sm text-gray-500">{subject}</p>
+                    <p className="text-[16px] text-[#737373] popreg ">{subject}</p>
                 </div>
                 <p className={`px-4 py-1 rounded-3xl text-sm font-medium ${statusColors[status] || "bg-gray-200 text-gray-700"}`}>
                     {status}
@@ -75,18 +75,18 @@ const TaskCards = ({ title, subject, status, date, submissions, totalSubmissions
         <div className="flex items-center gap-2">
             <div className="flex items-center gap-2">
                 <FaCalendar className="text-gray-500" />
-                <p className="text-gray-600">Due Date:</p>
+                <p className="text-gray-600 popmed">Due Date:</p>
             </div>
             <p className="font-medium">{date}</p>
         </div>
 
         <div className="flex items-center gap-2">
-            <p>Submissions:</p>
+            <p className="text-gray-600 popmed">Submissions:</p>
             <p className="font-medium">{submissions}/{totalSubmissions}</p>
         </div>
 
         <div className="flex items-center gap-2">
-            <p>Progress:</p>
+            <p className="text-gray-600 popmed">Progress:</p>
             <p className="font-medium">{progress}%</p>
         </div>
     </div>

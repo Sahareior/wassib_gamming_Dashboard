@@ -8,13 +8,13 @@ const Cards = ({ name, icons, number, details }) => {
     return (
         <div className='bg-white p-6 py-5 h-[200px] flex flex-col justify-between rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300'>
             <div className='flex justify-between items-center mb-4'>
-                <p className='text-gray-600 text-sm font-medium popreg'>{name}</p>
+                <p className='text-[#737373]  text-sm font-medium popreg'>{name}</p>
                 <div className='text-blue-500 text-lg'>
                     {icons}
                 </div>
             </div>
 <div>            <p className='text-2xl font-bold text-gray-800 popmed mb-1'>{number}</p>
-    <p className='text-sm text-gray-500 popreg'>{details}</p></div>
+    <p className='text-[12px] text-gray-500 popreg'>{details}</p></div>
         </div>
     );
 };
@@ -100,7 +100,7 @@ const Dashboard = () => {
    const subtitle="Manage and view all students enrolled in your platform"
 
     return (
-        <div className=' bg-gray-50 min-h-screen'>
+        <div className='  min-h-screen'>
             {/* Header Section */}
           <Headers title={"Dashboard"} subHeader={"Welcome back! Here's what's happening with your school."} />
 
@@ -119,8 +119,8 @@ const Dashboard = () => {
 
             <div className='bg-white mt-8 p-5 border-2 border-[#0000001A] rounded-2xl'>
                 <div className='pb-4'>
-                    <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
-                    <p className="text-sm text-gray-500">{subtitle}</p>
+                    <h2 className="text-lg popmed text-gray-800">{title}</h2>
+                    <p className="text-lg text-gray-500">{subtitle}</p>
                 </div>
                 <CommonTable
 
