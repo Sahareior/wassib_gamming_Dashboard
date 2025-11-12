@@ -1,11 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
 import {
-    createBrowserRouter,
-    RouterProvider,
+  createBrowserRouter,
+  RouterProvider,
 } from "react-router-dom";
-import App from './App.jsx'
+
+import App from "./App.jsx";
+
 import Dashboard from "./components/pages/Dashboard/Dashboard.jsx";
 import Students from "./components/pages/Students/Students.jsx";
 import Courses from "./components/pages/Courses/Courses.jsx";
@@ -17,65 +19,34 @@ import ManageLawFirms from "./components/pages/ManageLawFirms/ManageLawFirms.jsx
 import ApplicationTracker from "./components/pages/ManageApplicationTracker/ApplicationTracker.jsx";
 import Premium from "./components/pages/Premium/Premium.jsx";
 import Settings from "./components/pages/Settings/Settings.jsx";
-
+import Login from "./components/auth/Login.jsx";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element:<App />,
-        children: [
-            {
-                path: "/dashboard",
-                element: <Dashboard />,
-            },
-            {
-                path: "/students",
-                element: <Students />,
-            },
-            {
-                path:'/courses',
-                element: <Courses />,
-            },
-            {
-                path:'/quiz',
-                element: <Quizzs />
-            },
-            {
-                path:'/task',
-                element: <Tasks />,
-            },
-            {
-                path:'/manage-jobs',
-                element: <ManageJobs />,
-            },
-            {
-                path: '/manage-schools',
-                element: <ManageSchool />
-            },
-            {
-                path:'/manage-law-firms',
-                element: <ManageLawFirms />,
-            },
-            {
-                path:'/application-tacker',
-                element: <ApplicationTracker />
-            },
-            {
-                path:'/premium',
-                element: <Premium />,
-            },
-            {
-                path:'/settings',
-                element: <Settings />,
-            }
-        ]
-    },
+  {
+    path: "/",
+    element: <Login />, // ✅ initially show login page
+  },
+  {
+    path: "/",
+    element: <App />, // ✅ main layout for logged-in users
+    children: [
+      { path: "dashboard", element: <Dashboard /> },
+      { path: "students", element: <Students /> },
+      { path: "courses", element: <Courses /> },
+      { path: "quiz", element: <Quizzs /> },
+      { path: "task", element: <Tasks /> },
+      { path: "manage-jobs", element: <ManageJobs /> },
+      { path: "manage-schools", element: <ManageSchool /> },
+      { path: "manage-law-firms", element: <ManageLawFirms /> },
+      { path: "application-tacker", element: <ApplicationTracker /> },
+      { path: "premium", element: <Premium /> },
+      { path: "settings", element: <Settings /> },
+    ],
+  },
 ]);
 
-
-
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-      <RouterProvider router={router} />
-  </StrictMode>,
-)
+    <RouterProvider router={router} />
+  </StrictMode>
+);

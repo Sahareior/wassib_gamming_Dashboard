@@ -112,11 +112,11 @@ const Premium = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-3 w-full ">
+            <div className="grid grid-cols-3 gap-7 w-full ">
                 {plans.map((plan, index) => (
                     <div
                         key={index}
-                        className={`flex flex-col justify-between w-full max-w-md bg-white rounded-3xl border border-gray-100 shadow-[0px_4px_6px_-4px_#0000001A,0px_10px_41.9px_-3px_#0000001A] p-8 transition-all hover:-translate-y-1 ${
+                        className={`flex flex-col justify-between w-full  bg-white rounded-3xl border border-gray-100 shadow-[0px_4px_6px_-4px_#0000001A,0px_10px_41.9px_-3px_#0000001A] p-8 transition-all hover:-translate-y-1 ${
                             plan.isCurrent ? "ring-2 ring-green-300" : ""
                         }`}
                     >

@@ -18,6 +18,8 @@ function getItem(label, key, icon, children) {
     return { key, icon, children, label };
 }
 
+
+
 const items = [
     getItem('Dashboard', '/dashboard', <RiDashboardHorizontalLine size={18} />),
     getItem('Students', '/students', <GoPeople  size={18}/>),
@@ -40,13 +42,18 @@ const DashboardLayout = () => {
 
     const navigate = useNavigate();
 
+    const handelLogout = () => {
+    // Implement logout functionality here
+    navigate('/'); // Redirect to login page after logout
+}
+
     const handleMenuClick = (e) => {
         navigate(e.key); // key corresponds to route path like '/dashboard'
     };
 
     return (
         <Layout className='relative' style={{ minHeight: '100vh' }}>
-            <Sider className='w-[180%]' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+            <Sider className='w-[180%]' width={260} >
                 <div className="demo-logo-vertical mt-[10vh] w-2/6 bg-white" />
                 <div className='flex items-center top-8 left-4 absolute gap-2'>
                     <img className='w-[42px]'  src='/images/Container.png' />
@@ -63,6 +70,17 @@ const DashboardLayout = () => {
                     onClick={handleMenuClick}
 
                 />
+                <div>
+                    <button
+                    onClick={handelLogout}
+                        className='absolute bottom-4 left-4 w-11/12 py-3 bg-[#F7F7F7] text-black font-semibold rounded-xl mt-4 mb-6 hover:bg-red-50 hover:shadow-md transition-all duration-200'
+                    style={{
+                        boxShadow: '0px 4px 6px -4px #0000001A, 0px 10px 15px -3px #0000001A',
+                    }}
+                    >
+                        Logout
+                    </button>
+                </div>
             </Sider>
 
             <Layout>
@@ -81,7 +99,7 @@ const DashboardLayout = () => {
                         </div>
                         <div className="relative">
                             <img
-                                src="/path-to-avatar.jpg"
+                                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
                                 alt="Admin Avatar"
                                 className="w-10 h-10 rounded-full object-cover border-2 border-gray-200 shadow-sm"
                             />
