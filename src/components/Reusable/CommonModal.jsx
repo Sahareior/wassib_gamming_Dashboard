@@ -12,7 +12,7 @@ const CommonModal = ({
                      }) => {
     const [formData, setFormData] = useState({});
 
-    // Initialize form data only when modal opens or initialData changes
+
     useEffect(() => {
         if (isOpen) {
             const initialFormData = {};
@@ -21,7 +21,7 @@ const CommonModal = ({
             });
             setFormData(initialFormData);
         }
-    }, [isOpen]); // Remove fields from dependencies
+    }, [isOpen]); 
 
     const handleChange = (name, value) => {
         setFormData((prev) => ({ ...prev, [name]: value }));

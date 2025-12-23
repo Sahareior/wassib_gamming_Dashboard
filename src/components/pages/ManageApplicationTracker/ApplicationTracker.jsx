@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Headers from "../../Reusable/Headers.jsx";
 import {FaPlus, FaUsers, FaBook, FaTasks, FaFileAlt} from "react-icons/fa";
 import CommonTable from "../../Reusable/CommonTable.jsx";
+import ReusableModal from '../../Reusable/ReusableModal.jsx';
 
 // Demo data for the cards
 const cardsData = [
@@ -189,6 +190,12 @@ const ApplicationTracker = () => {
     const title = "Recent Students"
     const subtitle = "Manage and view all students enrolled in your platform"
 
+
+        const handleSave = (data) => {
+        console.log("Saved data:", data);
+        setOpen(false);
+    };
+
     return (
         <div className="w-full flex flex-col gap-8">
             {/* Header */}
@@ -199,7 +206,7 @@ const ApplicationTracker = () => {
                 />
                 <button
                     onClick={() => setOpen(true)}
-                    className="flex gap-2 items-center bg-yellow-400 hover:bg-yellow-500 py-3 rounded-xl px-6 shadow-sm hover:shadow-md transition-all duration-300 font-semibold text-gray-900 hover:scale-105"
+                    className="flex gap-2 items-center bg-[#FFFF00] hover:bg-yellow-500 py-3 rounded-xl px-6 shadow-sm hover:shadow-md transition-all duration-300 font-semibold text-gray-900 hover:scale-105"
                 >
                     <FaPlus className="text-sm" />
                     Create New Quiz
@@ -232,9 +239,14 @@ const ApplicationTracker = () => {
             </div>
 
             {/* Modal */}
-            <CreateQuizModal
+            <ReusableModal
                 isOpen={open}
                 onClose={() => setOpen(false)}
+                  onSave={handleSave}
+                location={'applicationTracker'}
+                title="Create New Task"
+               
+                submitText="Create Task"
             />
         </div>
     );

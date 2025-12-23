@@ -3,6 +3,7 @@ import Headers from "../../Reusable/Headers.jsx";
 import {FaPerson} from "react-icons/fa6";
 import {FaEdit, FaPlus, FaTrash} from "react-icons/fa";
 import CommonModal from "../../Reusable/CommonModal.jsx";
+import ReusableModal from '../../Reusable/ReusableModal.jsx';
 
 // Sample data array for courses
 const coursesData = [
@@ -145,12 +146,14 @@ const CourseCard = ({ course }) => {
                 </button>
             </div>
 
-            <CommonModal
+            <ReusableModal
                 isOpen={open}
                 onClose={() => setOpen(false)}
                 onSave={handleSave}
                 title="Edit Course"
                 fields={courseFields}
+                location={'course'}
+                edit={true}
                 submitText="Save Changes"
                 initialData={{
                     name: course.title,
@@ -191,11 +194,12 @@ const Courses = () => {
                 ))}
             </div>
 
-            <CommonModal
+            <ReusableModal
                 isOpen={open}
                 onClose={() => setOpen(false)}
                 onSave={handleSave}
                 title="Create New Course"
+                location={'course'}
                 fields={courseFields}
                 submitText="Create Course"
             />

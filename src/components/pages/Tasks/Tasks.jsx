@@ -3,6 +3,7 @@ import Headers from "../../Reusable/Headers.jsx";
 import { FaCalendar, FaEdit, FaPlus } from "react-icons/fa";
 import { Trash } from "lucide-react";
 import CommonModal from "../../Reusable/CommonModal.jsx";
+import ReusableModal from '../../Reusable/ReusableModal.jsx';
 
 const TaskCards = ({ title, subject, status, date, submissions, totalSubmissions, progress }) => {
     const [open, setOpen] = useState(false);
@@ -99,11 +100,13 @@ const TaskCards = ({ title, subject, status, date, submissions, totalSubmissions
         </button>
     </div>
 </div>
-            <CommonModal
+            <ReusableModal
                 isOpen={open}
                 onClose={() => setOpen(false)}
                 onSave={handleSave}
-                title="Create New Task"
+                location={'task'}
+                edit={true}
+                title="as New Task"
                 fields={courseFields}
                 submitText="Create Task"
             />
@@ -177,7 +180,7 @@ const Tasks = () => {
                 />
                 <button
                     onClick={()=> setOpen(true)}
-                    className="flex gap-2 items-center bg-yellow-400 hover:bg-yellow-500 py-3 rounded-xl px-6 shadow-sm hover:shadow-md transition-all duration-300 font-semibold text-gray-900 hover:scale-105"
+                    className="flex gap-2 items-center bg-[#FFFF00] hover:bg-yellow-500 py-3 rounded-xl px-6 shadow-sm hover:shadow-md transition-all duration-300 font-semibold text-gray-900 hover:scale-105"
                 >
                     <FaPlus className="text-sm" />
                     Create Task
@@ -191,10 +194,11 @@ const Tasks = () => {
                 ))}
             </div>
 
-            <CommonModal
+            <ReusableModal
                 isOpen={open}
                 onClose={() => setOpen(false)}
                 onSave={handleSave}
+                location={'task'}
                 title="Create New Task"
                 fields={courseFields}
                 submitText="Create Task"

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Headers from "../../Reusable/Headers.jsx";
 import { FaEdit, FaEye, FaPlus, FaTrash } from "react-icons/fa";
 import CommonModal from "../../Reusable/CommonModal.jsx";
+import ReusableModal from "../../Reusable/ReusableModal.jsx";
 
 /* ------------------------------------------------------------------ */
 /*  QUIZ CARD – unchanged except for the View button                 */
@@ -97,17 +98,12 @@ const QuizCards = ({
       <div className="flex justify-between items-center gap-4">
         <button
           onClick={onView}
-          className="flex items-center justify-center gap-2 w-1/2 border border-gray-300 py-2 rounded-3xl text-gray-700 font-medium hover:bg-gray-100 transition-all"
+          className="flex items-center justify-center gap-2 w-full border border-gray-300 py-2 rounded-3xl text-gray-700 font-medium hover:bg-gray-100 transition-all"
         >
           <FaEye className="text-gray-600" /> View
         </button>
 
-        <button
-          onClick={() => setOpenEdit(true)}
-          className="flex items-center justify-center gap-2 w-1/2 border border-gray-300 py-2 rounded-3xl text-gray-700 font-medium hover:bg-gray-100 transition-all"
-        >
-          <FaEdit className="text-gray-600" /> Edit
-        </button>
+
 
         <button className="flex items-center justify-center border border-gray-200 rounded-full p-4 hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all duration-200 text-gray-500">
           <FaTrash className="text-xs" />
@@ -126,9 +122,7 @@ const QuizCards = ({
   );
 };
 
-/* ------------------------------------------------------------------ */
-/*  VIEW DETAILS MODAL – exact copy of the screenshot                */
-/* ------------------------------------------------------------------ */
+
 const QuizDetailsModal = ({ isOpen, onClose, quiz }) => {
   if (!isOpen || !quiz) return null;
 
@@ -146,9 +140,9 @@ const QuizDetailsModal = ({ isOpen, onClose, quiz }) => {
           </button>
         </div>
 
-        {/* Body */}
+
         <div className="p-6 space-y-6">
-          {/* Title + Subject */}
+
           <div>
             <h3 className="text-lg font-medium text-gray-800">{quiz.title}</h3>
             <p className="text-sm text-gray-500">{quiz.subject}</p>
@@ -157,7 +151,7 @@ const QuizDetailsModal = ({ isOpen, onClose, quiz }) => {
             </span>
           </div>
 
-          {/* Stats Grid */}
+ 
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div className="flex items-center gap-2">
               <div className="p-2 bg-gray-100 rounded-full">
@@ -208,7 +202,7 @@ const QuizDetailsModal = ({ isOpen, onClose, quiz }) => {
             </div>
           </div>
 
-          {/* Completion Rate */}
+
           <div>
             <div className="flex justify-between items-center mb-2">
               <p className="text-sm font-medium text-gray-700">Completion Rate</p>
@@ -225,7 +219,6 @@ const QuizDetailsModal = ({ isOpen, onClose, quiz }) => {
             </p>
           </div>
 
-          {/* Recent Results */}
           <div className="bg-gray-50 rounded-xl p-4 space-y-2">
             <h4 className="font-medium text-gray-800">Recent Results</h4>
             <div className="grid grid-cols-2 gap-4 text-sm">
@@ -249,7 +242,7 @@ const QuizDetailsModal = ({ isOpen, onClose, quiz }) => {
           </div>
         </div>
 
-        {/* Footer */}
+
         <div className="flex justify-end p-6 border-t border-gray-200">
           <button
             onClick={onClose}
@@ -263,9 +256,8 @@ const QuizDetailsModal = ({ isOpen, onClose, quiz }) => {
   );
 };
 
-/* ------------------------------------------------------------------ */
-/*  MAIN PAGE – manages view state & passes data to modal            */
-/* ------------------------------------------------------------------ */
+
+
 const Quizzs = () => {
   const demoData = [
     {
@@ -379,12 +371,15 @@ const Quizzs = () => {
       />
 
       {/* Create Modal */}
-      <CommonModal
+
+         <ReusableModal
         isOpen={createOpen}
         onClose={() => setCreateOpen(false)}
         onSave={handleCreateSave}
-        title="Create New Quiz"
-        fields={createFields}
+        location={'quiz'}
+        title="Create Quiz"
+        subTitle={'Create a new quiz assessment for your students'}
+        edit={false}
       />
     </div>
   );

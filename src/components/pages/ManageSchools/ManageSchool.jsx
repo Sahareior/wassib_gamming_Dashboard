@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Swal from "sweetalert2";
 import {FaBuilding, FaCalendar, FaChevronRight, FaEye, FaTrash, FaTimes} from "react-icons/fa";
 import Headers from "../../Reusable/Headers.jsx";
+import { FaPlus } from 'react-icons/fa6';
+import ReusableModal from '../../Reusable/ReusableModal.jsx';
 
 // View Modal Component
 const ViewModal = ({ isOpen, onClose, school }) => {
@@ -260,10 +262,11 @@ const ManageSchool = () => {
         { id: 5, name: "Harmony Arts School", type: "Arts", date: "Oct 10, 2025", status: "Pending" },
         { id: 6, name: "Bright Future College", type: "Business", date: "Sep 30, 2025", status: "Approved" },
     ]);
-
+     const [isViewOpen, setIsViewOpen] = useState(false)
     const [selectedSchool, setSelectedSchool] = useState(null);
     const [isViewModalOpen, setIsViewModalOpen] = useState(false);
     const [selectedSchoolForView, setSelectedSchoolForView] = useState(null);
+    const [isDetails, setIsDetails] = useState(false)
 
     const handleDelete = (id) => {
         setSchools((prev) => prev.filter((school) => school.id !== id));
@@ -278,7 +281,7 @@ const ManageSchool = () => {
 
     const handleViewSchool = (school) => {
         setSelectedSchoolForView(school);
-        setIsViewModalOpen(true);
+        setIsDetails(true);
     };
 
     const handleCloseViewModal = () => {
@@ -286,15 +289,28 @@ const ManageSchool = () => {
         setSelectedSchoolForView(null);
     };
 
+        const handleSave = (data) => {
+        console.log("Saved data:", data);
+        setIsViewModalOpen(false);
+    };
+
     return (
         <div className="">
-            <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center">
                 <Headers
                     title={"Manage Schools"}
                     subHeader={
                         "Approve schools"
                     }
                 />
+
+                  <button
+                          onClick={() => setIsViewOpen(true)}
+                          className="flex gap-2 items-center bg-yellow-400 hover:bg-yellow-500 py-3 rounded-xl px-6 shadow-sm hover:shadow-md transition-all duration-300 font-semibold text-gray-900 hover:scale-105"
+                        >
+                      
+                        <FaPlus /> Add Schools
+                        </button>
             </div>
 
             {/* Grid Layout */}
@@ -314,26 +330,24 @@ const ManageSchool = () => {
                 ))}
             </div>
 
-            <button
-                style={{
-                    boxShadow: '0px 4px 18px -4px #0000001A, 0px 10px 41.9px -3px #0000001A',
-                }}
-                className={`flex items-center mt-10 rounded-3xl gap-2 px-6 py-3 font-medium transition-colors duration-200 ${
-                    selectedSchool
-                        ? 'bg-yellow-500 text-white hover:bg-yellow-600'
-                        : ' text-gray-500 cursor-not-allowed'
-                }`}
-                disabled={!selectedSchool}
-            >
-                <FaChevronRight />
-                Approve School
-            </button>
 
-            {/* View Modal */}
-            <ViewModal
-                isOpen={isViewModalOpen}
-                onClose={handleCloseViewModal}
-                school={selectedSchoolForView}
+
+         
+  
+            <ReusableModal
+                isOpen={isViewOpen}
+                onClose={()=> setIsViewOpen(false)}
+                 title="Add School"
+   
+                location={'manageSchool'}
+            
+            /> 
+         <ReusableModal
+                  location={'manageSchool'}
+                isOpen={isDetails}
+                onClose={()=> setIsDetails(false)}
+                data={selectedSchoolForView}
+                view={true}
             />
         </div>
     );

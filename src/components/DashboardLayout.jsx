@@ -11,6 +11,7 @@ import {FiBookOpen} from "react-icons/fi";
 import {LuCrown, LuFileQuestion, LuNotepadText} from "react-icons/lu";
 import {BiTask} from "react-icons/bi";
 import {IoSettingsOutline} from "react-icons/io5";
+import { GiKnightBanner } from 'react-icons/gi';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -25,11 +26,12 @@ const items = [
     getItem('Students', '/students', <GoPeople  size={18}/>),
     getItem('Courses', '/courses', <FiBookOpen  size={18}/>),
     getItem('Quizs', '/quiz', <LuFileQuestion size={18} />),
-    getItem('Task', '/task', <BiTask  size={18}/>),
+    // getItem('Task', '/task', <BiTask  size={18}/>),
     getItem('Manage Jobs', '/manage-jobs', <RiShoppingBag4Line  size={18}/>),
     getItem('Manage Schools', '/manage-schools', <FaSchool size={18} />),
     getItem('Manage Law Firms', '/manage-law-firms', <GoLaw  size={18}/>),
     getItem('Application Tracker', '/application-tacker', <LuNotepadText  size={18}/>),
+    getItem('Portfolio', '/portfolio', <GiKnightBanner size={18}/>),
     getItem('Premium', '/premium', <LuCrown  size={18}/>),
     getItem('Settings', '/settings', <IoSettingsOutline  size={18}/>),
 ];
@@ -121,7 +123,9 @@ const DashboardLayout = () => {
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
-                    Ant Design ©{new Date().getFullYear()} Created by Ant UED
+                    Aspiring School
+
+ ©{new Date().getFullYear()}
                 </Footer>
             </Layout>
         </Layout>

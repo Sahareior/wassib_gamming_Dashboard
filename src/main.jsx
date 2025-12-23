@@ -20,6 +20,7 @@ import ApplicationTracker from "./components/pages/ManageApplicationTracker/Appl
 import Premium from "./components/pages/Premium/Premium.jsx";
 import Settings from "./components/pages/Settings/Settings.jsx";
 import Login from "./components/auth/Login.jsx";
+import Portfolio from "./components/pages/portfolio/Portfolio.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,9 @@ const router = createBrowserRouter([
       { path: "application-tacker", element: <ApplicationTracker /> },
       { path: "premium", element: <Premium /> },
       { path: "settings", element: <Settings /> },
+      {
+        path:'portfolio', element: <Portfolio />
+      }
     ],
   },
 ]);

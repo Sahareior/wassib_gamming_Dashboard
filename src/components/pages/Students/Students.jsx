@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {FaPerson} from "react-icons/fa6";
 import Headers from "../../Reusable/Headers.jsx";
 import CommonTable from "../../Reusable/CommonTable.jsx";
 
-const Students = () => {
+import ReusableModal from '../../Reusable/ReusableModal.jsx';
+import { MdPersonAddAlt1 } from 'react-icons/md';
+
+
     const sampleData = [
         {
             student: "Sarah Johnson",
@@ -52,12 +55,21 @@ const Students = () => {
         { header: "Status", accessor: "status" },
         { header: "Actions", accessor: "actions" },
     ];
+
+const Students = () => {
+        const [open, setOpen] = useState(false);
+
+    const handleSave = (data) => {
+        console.log("Saved data:", data);
+        setOpen(false);
+    };
+
     return (
         <div>
           <div className='flex justify-between items-center'>
               <Headers title={"Students"} subHeader={"Manage all students enrolled in your platform"} />
-              <button className="flex gap-2 items-center bg-[#FFFF00] py-2 rounded-3xl px-5 shadow-[0px_4px_6px_-4px_#0000001A,0px_10px_15px_-3px_#0000001A]">
-                  <FaPerson /> Add Student
+              <button onClick={()=>setOpen(true)} className="flex gap-2 items-center bg-[#FFFF00] py-2 rounded-3xl px-5 shadow-[0px_4px_6px_-4px_#0000001A,0px_10px_15px_-3px_#0000001A]">
+                  <MdPersonAddAlt1 size={18}  /> Add Student
               </button>
 
           </div>
@@ -70,6 +82,16 @@ const Students = () => {
                     filterOptions={filterOptions}
                 />
             </div>
+            
+            <ReusableModal
+                isOpen={open}
+                onClose={() => setOpen(false)}
+                onSave={handleSave}
+                subTitle ='Add a new student to your school management platform.'
+                title="Add Student"
+                location={'student'}
+                submitText="Add Student"
+            />
         </div>
     );
 };
