@@ -1,46 +1,193 @@
-import React from "react";
-import { Upload } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Upload, FileText } from "lucide-react";
 
 const QuizFields = ({ formData, onChange, edit = false }) => {
-    return (
-        <div className="space-y-4">
-            {/* Upload Quiz File */}
-            <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Upload quiz file
-                </label>
+  const [previewUrl, setPreviewUrl] = useState(null);
 
-                <label className="flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 cursor-pointer hover:border-yellow-400 transition">
-                    <Upload className="h-6 w-6 text-gray-400 mb-2" />
-                    <p className="text-sm text-gray-500">
-                        Click to upload or drag and drop
-                    </p>
-                    <p className="text-xs text-gray-400">
-                        CSV, PDF file (Max. 5MB)
-                    </p>
+  useEffect(() => {
+    if (formData.quizFile instanceof File) {
+      const url = URL.createObjectURL(formData.quizFile);
+      setPreviewUrl(url);
 
-                    <input
-                        type="file"
-                        accept=".csv,.pdf"
-                        className="hidden"
-                        onChange={(e) =>
-                            onChange("quizFile", e.target.files[0])
-                        }
-                    />
-                </label>
+      return () => URL.revokeObjectURL(url);
+    }
+  }, [formData.quizFile]);
 
-                {/* Show existing file in edit mode */}
-                {edit && formData.quizFileName && (
-                    <p className="text-xs text-gray-500 mt-2">
-                        Current file:{" "}
-                        <span className="font-medium">
-                            {formData.quizFileName}
-                        </span>
-                    </p>
-                )}
-            </div>
+  const isPDF =
+    formData.quizFile?.type === "application/pdf" ||
+    formData.quizFileName?.endsWith(".pdf");
+
+  const isCSV =
+    formData.quizFile?.type === "text/csv" ||
+    formData.quizFileName?.endsWith(".csv");
+
+  // Form fields configuration
+  const createFields = [
+    { 
+      name: "name", 
+      label: "Quiz Title", 
+      type: "text", 
+      placeholder: "e.g., Contract Law - Chapter 3: Offer and Acceptance" 
+    },
+    {
+      name: "educationLevel",
+      label: "Education Level",
+      type: "select",
+      options: [
+        { label: "1L - First Year", value: "1L" },
+        { label: "2L - Second Year", value: "2L" },
+        { label: "3L - Third Year", value: "3L" },
+        { label: "LL.M. Program", value: "LLM" },
+        { label: "Bar Exam Prep", value: "BAR" },
+        { label: "Continuing Legal Education", value: "CLE" },
+        { label: "Legal Internship Training", value: "INTERN" },
+      ],
+      placeholder: "Select education level",
+    },
+    { 
+      name: "questions", 
+      label: "Number of Questions", 
+      type: "text", 
+      placeholder: "e.g., 25" 
+    },
+    { 
+      name: "duration", 
+      label: "Duration (minutes)", 
+      type: "text", 
+      placeholder: "e.g., 60" 
+    },
+    {
+      name: "status",
+      label: "Status",
+      type: "select",
+      options: [
+        { label: "Active", value: "Active" },
+        { label: "Inactive", value: "Inactive" },
+        { label: "Upcoming", value: "Upcoming" },
+        { label: "Draft", value: "Draft" },
+      ],
+      placeholder: "Select status",
+    },
+  ];
+
+  // Filter out status field if in create mode and not edit
+  const fields = edit ? createFields : createFields.filter(field => field.name !== "status");
+
+  const renderField = (field) => {
+    switch (field.type) {
+      case "select":
+        return (
+          <select
+            id={field.name}
+            value={formData[field.name] || ""}
+            onChange={(e) => onChange(field.name, e.target.value)}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+          >
+            <option value="">{field.placeholder}</option>
+            {field.options.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        );
+      
+      default:
+        return (
+          <input
+            type={field.type}
+            id={field.name}
+            value={formData[field.name] || ""}
+            onChange={(e) => onChange(field.name, e.target.value)}
+            placeholder={field.placeholder}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+          />
+        );
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Form Fields */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {fields.map((field) => (
+          <div key={field.name}>
+            <label 
+              htmlFor={field.name} 
+              className="block text-sm font-medium text-gray-700"
+            >
+              {field.label}
+            </label>
+            {renderField(field)}
+          </div>
+        ))}
+      </div>
+
+      {/* Upload Section */}
+      <div className="border-t pt-6">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Upload quiz file
+        </label>
+
+        <label className="flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-6 cursor-pointer hover:border-yellow-400 transition">
+          <Upload className="h-6 w-6 text-gray-400 mb-2" />
+          <p className="text-sm text-gray-500">
+            Click to upload or drag and drop
+          </p>
+          <p className="text-xs text-gray-400">
+            Upload case files, legal documents, or question banks (CSV, PDF) Max. 5MB
+          </p>
+
+          <input
+            type="file"
+            accept=".csv,.pdf"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (!file) return;
+
+              onChange("quizFile", file);
+              onChange("quizFileName", file.name);
+            }}
+          />
+        </label>
+
+        {/* File Name */}
+        {(formData.quizFileName || formData.quizFile) && (
+          <div className="flex items-center gap-2 mt-2 text-sm text-gray-600">
+            <FileText className="h-4 w-4" />
+            {formData.quizFileName || formData.quizFile?.name}
+          </div>
+        )}
+      </div>
+
+      {/* 🔍 PREVIEW SECTION */}
+      {previewUrl && (
+        <div className="border rounded-lg p-3 bg-gray-50">
+          <p className="text-xs font-medium text-gray-500 mb-2">
+            Legal Document Preview
+          </p>
+
+          {/* PDF Preview */}
+          {isPDF && (
+            <iframe
+              src={previewUrl}
+              className="w-full h-64 rounded-md border"
+              title="Legal Document Preview"
+            />
+          )}
+
+          {/* CSV Preview */}
+          {isCSV && (
+            <p className="text-sm text-gray-600">
+              Case file uploaded successfully. Preview not supported —
+              document will be processed for legal terminology and citations.
+            </p>
+          )}
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default QuizFields;

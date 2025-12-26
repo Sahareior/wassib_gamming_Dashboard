@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react";
 
 const PortfollioView = ({ data = {}, onBack }) => {
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 h-[79vh] overflow-y-auto">
             {/* Banner Image */}
             <div className="relative rounded-lg overflow-hidden">
                 <img

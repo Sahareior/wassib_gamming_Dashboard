@@ -4,7 +4,7 @@ import { Upload } from "lucide-react";
 const CourseFields = ({ formData, onChange, edit = false }) => {
     return (
         <div className="space-y-4">
-            {/* Course Name */}
+      
             <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                     Course Name
@@ -18,7 +18,7 @@ const CourseFields = ({ formData, onChange, edit = false }) => {
                 />
             </div>
 
-            {/* Description */}
+
             <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                     Description
@@ -32,7 +32,7 @@ const CourseFields = ({ formData, onChange, edit = false }) => {
                 />
             </div>
 
-            {/* Grade & Category */}
+           
             <div className="grid grid-cols-2 gap-4">
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -69,7 +69,7 @@ const CourseFields = ({ formData, onChange, edit = false }) => {
                 </div>
             </div>
 
-            {/* Upload Video */}
+   
             <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                     Upload course video
@@ -94,7 +94,7 @@ const CourseFields = ({ formData, onChange, edit = false }) => {
                     />
                 </label>
 
-                {/* Show file name in Edit mode */}
+   
                 {edit && formData.videoName && (
                     <p className="text-xs text-gray-500 mt-2">
                         Current file: <span className="font-medium">{formData.videoName}</span>

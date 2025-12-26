@@ -7,7 +7,7 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
 
-    // Filter data based on search and filter
+
     const filteredData = useMemo(() => {
         return data.filter((item) => {
             const matchesSearch = Object.values(item)
@@ -20,25 +20,25 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
         });
     }, [data, searchTerm, selectedFilter]);
 
-    // Pagination calculations
+
     const totalItems = filteredData.length;
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentData = filteredData.slice(startIndex, endIndex);
 
-    // Handle page change
+   
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
 
-    // Handle items per page change
+ 
     const handleItemsPerPageChange = (e) => {
         setItemsPerPage(Number(e.target.value));
-        setCurrentPage(1); // Reset to first page when changing items per page
+        setCurrentPage(1); 
     };
 
-    // Generate page numbers for pagination
+
     const getPageNumbers = () => {
         const pages = [];
         const maxVisiblePages = 5;
@@ -46,7 +46,6 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
         let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
         let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
-        // Adjust start page if we're near the end
         if (endPage - startPage + 1 < maxVisiblePages) {
             startPage = Math.max(1, endPage - maxVisiblePages + 1);
         }
@@ -62,7 +61,7 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
 <div>
     <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-4 gap-3">
         <div className="flex justify-between gap-3 w-full items-center">
-            {/* Search */}
+      
             <div className="relative">
                 <FiSearch className="absolute left-3 top-2.5 text-gray-400" />
                 <input
@@ -72,17 +71,17 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
                     value={searchTerm}
                     onChange={(e) => {
                         setSearchTerm(e.target.value);
-                        setCurrentPage(1); // Reset to first page when searching
+                        setCurrentPage(1); 
                     }}
                 />
             </div>
-            {/* Filter */}
+           
             <select
                 className="border border-gray-200 rounded-full py-1 px-5 items-center text-sm focus:ring-1 focus:ring-blue-400"
                 value={selectedFilter}
                 onChange={(e) => {
                     setSelectedFilter(e.target.value);
-                    setCurrentPage(1); // Reset to first page when filtering
+                    setCurrentPage(1);
                 }}
             >
                 {filterOptions.map((opt) => (
@@ -93,14 +92,12 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
     </div>
 
     <div className="bg-white border-2 border-[#0000001A] rounded-2xl p-1 overflow-x-auto">
-        {/* Header */}
 
-        {/* Table */}
         <table className="w-full text-sm text-left">
             <thead>
             <tr className="text-gray-600 popmed border-b-2 border-gray-200">
                 {columns.map((col) => (
-                    <th key={col.accessor} className="py-4 px-4 font-semibold"> {/* Increased py-2 to py-4 */}
+                    <th key={col.accessor} className="py-4 px-4 font-semibold"> 
                         {col.header}
                     </th>
                 ))}
@@ -113,7 +110,7 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
                     className="border-b-2 mb-4 transition-all rounded-lg"
                 >
                     {columns.map((col) => (
-                        <td key={col.accessor} className="py-4 px-4 text-gray-700"> {/* Increased py-2 to py-4 */}
+                        <td key={col.accessor} className="py-4 px-4 text-gray-700">
                             {col.accessor === "status" ? (
                                 <span
                                     className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -138,9 +135,9 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
             </tbody>
         </table>
 
-        {/* Pagination */}
+    
         <div className="flex flex-col sm:flex-row justify-between items-center mt-6 gap-4">
-            {/* Items per page selector */}
+           
             <div className="flex items-center gap-2 text-sm text-gray-600">
                 <span>Show</span>
                 <select
@@ -156,14 +153,14 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
                 <span>entries</span>
             </div>
 
-            {/* Page info */}
+         
             <div className="text-sm text-gray-600">
                 Showing {startIndex + 1} to {Math.min(endIndex, totalItems)} of {totalItems} entries
             </div>
 
-            {/* Pagination controls */}
+         
             <div className="flex items-center gap-4">
-                {/* Previous button */}
+           
                 <button
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
@@ -172,7 +169,7 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
                     <FiChevronLeft className="w-4 h-4" />
                 </button>
 
-                {/* Page numbers */}
+         
                 {getPageNumbers().map((page) => (
                     <button
                         key={page}
@@ -187,7 +184,7 @@ const CommonTable = ({ title, subtitle, columns, data, filterOptions }) => {
                     </button>
                 ))}
 
-                {/* Next button */}
+              
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}

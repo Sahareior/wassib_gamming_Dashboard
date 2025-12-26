@@ -5,7 +5,7 @@ import {FaEdit, FaPlus, FaTrash} from "react-icons/fa";
 import CommonModal from "../../Reusable/CommonModal.jsx";
 import ReusableModal from '../../Reusable/ReusableModal.jsx';
 
-// Sample data array for courses
+
 const coursesData = [
     {
         id: 1,
@@ -41,7 +41,7 @@ const coursesData = [
     }
 ];
 
-// Define fields outside components to prevent recreation
+
 const courseFields = [
     { name: "name", label: "Course Name", type: "text", placeholder: "Enter course name" },
     { name: "description", label: "Description", type: "textarea", placeholder: "Brief description of the course..." },
@@ -105,7 +105,7 @@ const CourseCard = ({ course }) => {
 
     return (
         <div className='bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-gray-200 group'>
-            {/* Header Section */}
+        
             <div className='flex justify-between items-start mb-6'>
                 <div className='flex items-start gap-3'>
                     <div className={`p-2 rounded-lg ${colorClasses[course.color]} mt-1`}>
@@ -121,7 +121,6 @@ const CourseCard = ({ course }) => {
                 </span>
             </div>
 
-            {/* Stats Section */}
             <div className='mb-6'>
                 <div className='flex items-center gap-2 text-gray-600'>
                     <div className='w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center'>
@@ -132,7 +131,7 @@ const CourseCard = ({ course }) => {
                 </div>
             </div>
 
-            {/* Actions Section */}
+  
             <div className='flex justify-between items-center gap-3'>
                 <button
                     onClick={() => setOpen(true)}
@@ -174,8 +173,8 @@ const Courses = () => {
     };
 
     return (
-        <div className='p-6'>
-            {/* Header Section */}
+        <div className='p-0'>
+         
             <div className='flex justify-between items-center mb-8'>
                 <Headers title={"Courses"} subHeader={"Manage all courses and learning materials"} />
                 <button
@@ -187,7 +186,7 @@ const Courses = () => {
                 </button>
             </div>
 
-            {/* Courses Grid */}
+   
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6'>
                 {coursesData.map(course => (
                     <CourseCard key={course.id} course={course} />

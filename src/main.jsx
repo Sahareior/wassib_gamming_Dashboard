@@ -25,11 +25,11 @@ import Portfolio from "./components/pages/portfolio/Portfolio.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Login />, // ✅ initially show login page
+    element: <Login />,
   },
   {
     path: "/",
-    element: <App />, // ✅ main layout for logged-in users
+    element: <App />, 
     children: [
       { path: "dashboard", element: <Dashboard /> },
       { path: "students", element: <Students /> },

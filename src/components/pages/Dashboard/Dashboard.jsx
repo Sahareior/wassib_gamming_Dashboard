@@ -101,10 +101,10 @@ const Dashboard = () => {
 
     return (
         <div className='  min-h-screen'>
-            {/* Header Section */}
+     
           <Headers title={"Dashboard"} subHeader={"Welcome back! Here's what's happening with your school."} />
 
-            {/* Stats Grid */}
+         
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
                 {statsData.map((item, index) => (
                     <Cards

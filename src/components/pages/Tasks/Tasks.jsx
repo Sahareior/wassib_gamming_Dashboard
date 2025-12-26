@@ -55,7 +55,7 @@ const TaskCards = ({ title, subject, status, date, submissions, totalSubmissions
 
     return (
         <div className="p-5 bg-white shadow-md rounded-2xl hover:shadow-lg transition-all duration-300 border border-gray-100 mb-4">
-            {/* Top Section */}
+
             <div className="flex items-center justify-between mb-4">
                 <div>
                     <p className="text-lg font-semibold text-gray-800">{title}</p>
@@ -172,7 +172,7 @@ const Tasks = () => {
 
     return (
         <div className="space-y-8">
-            {/* Header */}
+          
             <div className="flex justify-between items-center">
                 <Headers
                     title={"Tasks"}
@@ -187,7 +187,7 @@ const Tasks = () => {
                 </button>
             </div>
 
-            {/* Task Cards */}
+            
             <div className="">
                 {taskData.map((task, index) => (
                     <TaskCards key={index} {...task} />

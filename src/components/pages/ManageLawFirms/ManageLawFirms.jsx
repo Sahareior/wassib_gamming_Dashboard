@@ -1,7 +1,7 @@
 // ManageLawFirms.jsx
 import React, { useState } from "react";
 import Headers from "../../Reusable/Headers.jsx";
-import {FaBuilding, FaChevronRight, FaPlus} from "react-icons/fa";
+import {FaBuilding, FaChevronRight, FaEdit, FaEye, FaPlus, FaTrash} from "react-icons/fa";
 import {
     Button,
     Card,
@@ -26,9 +26,7 @@ import ReusableModal from "../../Reusable/ReusableModal.jsx";
 
 const { TextArea } = Input;
 
-/* ------------------------------------------------------------------ */
-/* -------------------------- DEMO DATA ----------------------------- */
-/* ------------------------------------------------------------------ */
+
 const firmsData = [
     {
         id: 1,
@@ -72,13 +70,12 @@ const firmsData = [
     },
 ];
 
-/* ------------------------------------------------------------------ */
-/* -------------------------- CARD COMPONENT ------------------------ */
-/* ------------------------------------------------------------------ */
 
 
 
-const LawFirmCard = ({ firm, isSelected, onSelect, onViewProfile }) => {
+
+
+const LawFirmCard = ({ firm, isSelected, onSelect, onViewProfile,onEdit }) => {
     const visibleTags = firm.tags.slice(0, 2);
     const extraCount = firm.tags.length - visibleTags.length;
 
@@ -103,7 +100,7 @@ const LawFirmCard = ({ firm, isSelected, onSelect, onViewProfile }) => {
             bodyStyle={{ padding: 0 }}
             onClick={handleCardClick}
         >
-            {/* Header – Gradient + Logo */}
+          
             <div
                 className={`bg-gradient-to-r ${firm.gradient} p-4 md:p-6 flex justify-center items-center relative h-24 md:h-32`}
             >
@@ -125,7 +122,7 @@ const LawFirmCard = ({ firm, isSelected, onSelect, onViewProfile }) => {
 
             </div>
 
-            {/* Body */}
+    
             <div className="p-4 md:p-6">
                 <h3 className="text-lg md:text-xl font-semibold text-gray-900">{firm.name}</h3>
                 <p className="text-xs md:text-sm text-gray-600 mt-1">{firm.tagline}</p>
@@ -156,187 +153,56 @@ const LawFirmCard = ({ firm, isSelected, onSelect, onViewProfile }) => {
                     )}
                 </Row>
 
-                <Row className="mt-8 md:mt-12" gutter={[8, 8]} align="middle">
-                    <Col>
-                        <Button
-                            shape="circle"
-                            icon={<HeartOutlined />}
-                            className="w-7 h-7 md:w-8 md:h-8 flex items-center justify-center border-gray-300"
-                        />
-                    </Col>
-                    <Col flex="auto">
-                        <button
-                            onClick={handleViewProfileClick}
-                            className="w-full"
-                        >
-                            <Button
-                                type="primary"
-                                style={{
-                                    backgroundColor: "#ffff00",
-                                    borderColor: "#ffff00",
-                                    borderRadius: 14,
-                                    width: "100%",
-                                    height: "32px",
-                                }}
-                                className="flex items-center justify-center gap-1 md:gap-2 hover:bg-yellow-500 hover:border-yellow-500"
-                            >
-                <span
-                    style={{
-                        fontFamily: "'Poppins-Medium', Helvetica",
-                        fontSize: "12px",
-                        color: "#1e1e1e",
-                        fontWeight: 500,
-                    }}
-                    className='flex items-center gap-3'
+     <div className="flex items-center justify-between mt-8 gap-3">
+                <button
+                    onClick={handleViewProfileClick}
+                    className="flex items-center justify-center gap-2 flex-1 border border-gray-300 py-[7px] rounded-3xl text-gray-700 font-medium hover:bg-gray-100 transition-all"
                 >
-                  View Profile
-                    <FaChevronRight />
-                </span>
-                                <RightOutlined className="text-xs md:text-sm" />
-                            </Button>
-                        </button>
-                    </Col>
-                </Row>
+                    <FaEye size={19} className="text-gray-600" /> View
+                </button>
+                <button
+                   onClick={onEdit}
+                    className="flex items-center justify-center gap-2 flex-1 border border-gray-300 py-[7px] rounded-3xl text-gray-700 font-medium hover:bg-gray-100 transition-all"
+                >
+                    <FaEdit size={19} className="text-gray-600" /> Edit
+                </button>
+             
+                <button
+                    
+                    className="flex items-center justify-center border border-gray-200 rounded-full p-3 hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all duration-200 text-gray-500"
+                >
+                    <FaTrash size={19} />
+                </button>
+            </div>
             </div>
         </Card>
     );
 };
 
-/* ------------------------------------------------------------------ */
-/* -------------------------- CREATE MODAL -------------------------- */
-/* ------------------------------------------------------------------ */
-const CreateLawFirmModal = ({ visible, onCancel, onCreate }) => {
-    const [form] = Form.useForm();
-    const [loading, setLoading] = useState(false);
 
-    const handleOk = () => {
-        form
-            .validateFields()
-            .then(async (values) => {
-                setLoading(true);
-                try {
-                    // Simulate API call
-                    await new Promise(resolve => setTimeout(resolve, 1000));
 
-                    // Show success popup
-                    Swal.fire({
-                        title: 'Congratulations!',
-                        text: 'Law firm created successfully!',
-                        icon: 'success',
-                        confirmButtonColor: '#ffff00',
-                        confirmButtonText: 'Continue',
-                        customClass: {
-                            confirmButton: 'text-gray-900 font-semibold'
-                        }
-                    }).then(() => {
-                        onCreate(values);
-                        form.resetFields();
-                        setLoading(false);
-                    });
-                } catch (error) {
-                    setLoading(false);
-                    message.error("Failed to create law firm");
-                }
-            })
-            .catch(() => {
-                // validation error – AntD already shows inline messages
-            });
-    };
 
-    return (
-        <Modal
-            title={<span className="text-xl font-semibold">Create Law Firm</span>}
-            open={visible}
-            onCancel={onCancel}
-            width={640}
-            footer={[
-                <Button key="cancel" onClick={onCancel} disabled={loading}>
-                    Cancel
-                </Button>,
-                <Button
-                    key="create"
-                    type="primary"
-                    style={{
-                        backgroundColor: "#ffff00",
-                        borderColor: "#ffff00",
-                        color: "#1e1e1e",
-                    }}
-                    onClick={handleOk}
-                    loading={loading}
-                    disabled={loading}
-                >
-                    Create Law Firm
-                </Button>,
-            ]}
-        >
-            <Form form={form} layout="vertical" className="mt-4">
-                {/* About the Firm */}
-                <Form.Item
-                    label={<span className="font-medium">About the Firm</span>}
-                    name="about"
-                    rules={[{ required: true, message: "Please enter an overview" }]}
-                >
-                    <TextArea placeholder="Overview of the firm's history and values." rows={3} />
-                </Form.Item>
 
-                {/* Areas of Expertise */}
-                <Form.Item
-                    label={<span className="font-medium">Areas of Expertise</span>}
-                    name="expertise"
-                    rules={[{ required: true, message: "Please list services offered" }]}
-                >
-                    <TextArea placeholder="Detailed legal services offered." rows={2} />
-                </Form.Item>
-
-                {/* Internship / Training Opportunities */}
-                <Form.Item
-                    label={<span className="font-medium">Internship / Training Opportunities</span>}
-                    name="internships"
-                    rules={[{ required: true, message: "Please describe programs" }]}
-                >
-                    <TextArea placeholder="Summer internship, graduate programs" rows={2} />
-                </Form.Item>
-
-                {/* Description (pre-filled example) */}
-                <Form.Item
-                    label={<span className="font-medium">Description</span>}
-                    name="description"
-                    rules={[{ required: true, message: "Please enter a description" }]}
-                >
-                    <TextArea
-                        placeholder="Our gym has had both a local and national presence..."
-                        rows={5}
-                        defaultValue={
-                            "Our gym has had both a local and a national presence since its founding in 2011, however its roots go much deeper. Our Team has been training and competing across the world in multiple combat sports to bring you the best instruction available. We are athletes, hobbyists, competitors, students and professionals. We strive to learn and grow while pushing others around us to do the same. We are a family, and we are a team."
-                        }
-                    />
-                </Form.Item>
-            </Form>
-
-            <p className="text-sm text-gray-500 mt-2">
-                Make changes to this section here. Click save when you're done.
-            </p>
-        </Modal>
-    );
-};
-
-/* ------------------------------------------------------------------ */
-/* -------------------------- MAIN COMPONENT ------------------------ */
-/* ------------------------------------------------------------------ */
 const ManageLawFirms = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedFirms, setSelectedFirms] = useState(new Set());
     const [isViewModalOpen, setIsViewModalOpen] = useState(false);
     const [selectedFirm, setSelectedFirm] = useState(null);
+    const [isEdit,setIsEdit] = useState(false)
 
     const openModal = () => setModalVisible(true);
     const closeModal = () => setModalVisible(false);
 
     const handleCreate = (values) => {
         console.log("New Law Firm payload:", values);
-        // TODO: send to your backend / update local state
+      
         closeModal();
     };
+
+    const handelEdit = (value) => {
+        setSelectedFirm(value)
+        setIsEdit(true)
+    }
 
     const handleSelectFirm = (firmId) => {
         setSelectedFirms(prev => {
@@ -371,7 +237,7 @@ const ManageLawFirms = () => {
             return;
         }
 
-        // Show success popup for approval
+   
         Swal.fire({
             title: 'Congratulations!',
             text: `Approved ${selectedFirms.size} law firm(s) successfully!`,
@@ -382,17 +248,17 @@ const ManageLawFirms = () => {
                 confirmButton: 'text-gray-900 font-semibold'
             }
         }).then(() => {
-            // TODO: Implement your approval logic here
+           
             console.log("Approving firms:", Array.from(selectedFirms));
 
-            // Clear selection after approval
+  
             setSelectedFirms(new Set());
         });
     };
 
     return (
-        <div className="w-full flex flex-col gap-8 p-4 md:p-6">
-            {/* Header + Create button */}
+        <div className="w-full flex flex-col gap-8 ">
+            
             <div className="flex justify-between items-center">
                 <Headers
                     title="Manage Law Firm Profiles"
@@ -407,7 +273,6 @@ const ManageLawFirms = () => {
                 </button>
             </div>
 
-            {/* Grid of cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {firmsData.map((firm) => (
                     <LawFirmCard
@@ -416,12 +281,13 @@ const ManageLawFirms = () => {
                         isSelected={selectedFirms.has(firm.id)}
                         onSelect={handleSelectFirm}
                         onViewProfile={handleViewProfile}
+                        onEdit ={handelEdit}
                     />
                 ))}
             </div>
 
 
-            {/* Modals */}
+        
             <ReusableModal
                 isOpen={modalVisible}
                 onClose={closeModal}
@@ -434,6 +300,14 @@ const ManageLawFirms = () => {
                 data={selectedFirm}
                 view={true}
                 location={'createLawFirms'}
+            />
+            <ReusableModal
+                isOpen={isEdit}
+                onClose={()=> setIsEdit(false)}
+                data={selectedFirm}
+                onSave={handleSave}
+               edit={true}
+            location={'createLawFirms'}
             />
         </div>
     );

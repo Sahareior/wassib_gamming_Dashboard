@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import EditSection from "../editor/EditSection";
+
 import PortfollioView from "./PortfollioView";
+import TextEditor from './../editor/EditSection';
 
 const PortfolioFeilds = ({
     formData = {},
@@ -118,7 +119,7 @@ const PortfolioFeilds = ({
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                     Content
                 </label>
-                <EditSection
+                <TextEditor
                     value={formData.content || ""}
                     onChange={(value) => onChange("content", value)}
                 />

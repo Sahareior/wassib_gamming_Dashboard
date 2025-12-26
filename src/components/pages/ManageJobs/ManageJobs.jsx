@@ -62,7 +62,7 @@ const jobsData = [
 
 
 
-const JobsCard = ({ company, position, status, date, onDelete, onView }) => {
+const JobsCard = ({ company, position, status, date, onDelete, onView,onEdit }) => {
 
     const statusColor =
         status === "Approved"
@@ -150,6 +150,12 @@ const JobsCard = ({ company, position, status, date, onDelete, onView }) => {
                 >
                     <FaEye size={19} className="text-gray-600" /> View
                 </button>
+                <button
+                    onClick={onEdit}
+                    className="flex items-center justify-center gap-2 flex-1 border border-gray-300 py-[7px] rounded-3xl text-gray-700 font-medium hover:bg-gray-100 transition-all"
+                >
+                    <FaEdit size={19} className="text-gray-600" /> Edit
+                </button>
              
                 <button
                     onClick={handleDelete}
@@ -166,6 +172,7 @@ const ManageJobs = () => {
     const [selectedJob, setSelectedJob] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isViewOpen, setIsViewOpen] = useState(false)
+    const [isEdit, setIsEdit] = useState(false)
 
     const handleDeleteJob = (jobId) => {
 
@@ -177,6 +184,11 @@ const ManageJobs = () => {
         setSelectedJob(job);
         setIsViewOpen(true);
     };
+
+    const handelEditJob = (job) => {
+       setSelectedJob(job);
+        setIsEdit(true)
+    }
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
@@ -200,7 +212,7 @@ const ManageJobs = () => {
 
                   <button
                           onClick={() => setIsModalOpen(true)}
-                          className="flex gap-2 items-center bg-yellow-400 hover:bg-yellow-500 py-3 rounded-xl px-6 shadow-sm hover:shadow-md transition-all duration-300 font-semibold text-gray-900 hover:scale-105"
+                          className="flex gap-2 items-center bg-[#FFFF00] hover:bg-yellow-500 py-3 rounded-xl px-6 shadow-sm hover:shadow-md transition-all duration-300 font-semibold text-gray-900 hover:scale-105"
                         >
                       
                         <FaPlus /> Add Jobs
@@ -219,6 +231,7 @@ const ManageJobs = () => {
                         date={job.date}
                         onDelete={() => handleDeleteJob(job.id)}
                         onView={() => handleViewJob(job)}
+                        onEdit= {() => handelEditJob(job)}
                     />
                 ))}
             </div>
@@ -241,6 +254,14 @@ const ManageJobs = () => {
                 data={selectedJob}
                 location={'manageJob'}
                view ={true}
+            />
+            <ReusableModal
+                isOpen={isEdit}
+                onClose={()=> setIsEdit(false)}
+                onSave={handleSave}
+                location={'manageJob'}
+                data={selectedJob}
+               edit={true}
             />
         </div>
     );

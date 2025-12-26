@@ -4,9 +4,7 @@ import { FaEdit, FaEye, FaPlus, FaTrash } from "react-icons/fa";
 import CommonModal from "../../Reusable/CommonModal.jsx";
 import ReusableModal from "../../Reusable/ReusableModal.jsx";
 
-/* ------------------------------------------------------------------ */
-/*  QUIZ CARD – unchanged except for the View button                 */
-/* ------------------------------------------------------------------ */
+
 const QuizCards = ({
   title,
   subject,
@@ -63,22 +61,16 @@ const QuizCards = ({
 
   return (
     <div className="p-5 bg-white shadow-md rounded-2xl hover:shadow-lg transition-all duration-300 border border-gray-100">
-      {/* Top */}
+  
       <div className="flex justify-between items-start mb-4">
         <div>
           <p className="text-lg font-semibold text-gray-800">{title}</p>
           <p className="text-sm text-gray-500">{subject}</p>
         </div>
-        <p
-          className={`px-4 py-1 rounded-2xl text-sm font-medium ${
-            statusColors[status] || "bg-gray-200 text-gray-700"
-          }`}
-        >
-          {status}
-        </p>
+
       </div>
 
-      {/* Middle */}
+    
       <div className="mb-5 space-y-4">
         <div className="flex justify-between items-center">
           <p className="text-gray-500 text-sm">Questions</p>
@@ -94,13 +86,13 @@ const QuizCards = ({
         </div>
       </div>
 
-      {/* Bottom Buttons */}
+  
       <div className="flex justify-between items-center gap-4">
         <button
           onClick={onView}
           className="flex items-center justify-center gap-2 w-full border border-gray-300 py-2 rounded-3xl text-gray-700 font-medium hover:bg-gray-100 transition-all"
         >
-          <FaEye className="text-gray-600" /> View
+          <FaEye  className="text-gray-600 text-[18px]" /> <p>View</p>
         </button>
 
 
@@ -110,7 +102,7 @@ const QuizCards = ({
         </button>
       </div>
 
-      {/* Edit Modal (re-use CommonModal) */}
+      
       <CommonModal
         isOpen={openEdit}
         onClose={() => setOpenEdit(false)}
@@ -134,7 +126,7 @@ const QuizDetailsModal = ({ isOpen, onClose, quiz }) => {
           <h2 className="text-xl font-semibold text-gray-900">Quiz Details</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            className="p-2 hover:bg-gray-100 text-2xl rounded-full transition-colors"
           >
             ×
           </button>
@@ -146,9 +138,7 @@ const QuizDetailsModal = ({ isOpen, onClose, quiz }) => {
           <div>
             <h3 className="text-lg font-medium text-gray-800">{quiz.title}</h3>
             <p className="text-sm text-gray-500">{quiz.subject}</p>
-            <span className="mt-2 inline-block px-3 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">
-              Active
-            </span>
+          
           </div>
 
  
@@ -337,22 +327,22 @@ const Quizzs = () => {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
+    
       <div className="flex justify-between items-center">
         <Headers
-          title={"Quizzes"}
-          subHeader={"Manage all quizzes available for your students"}
+          title={"Quiz's"}
+          subHeader={"Manage all quizs available for your students"}
         />
         <button
           onClick={() => setCreateOpen(true)}
-          className="flex gap-2 items-center bg-yellow-400 hover:bg-yellow-500 py-3 rounded-xl px-6 shadow-sm hover:shadow-md transition-all duration-300 font-semibold text-gray-900 hover:scale-105"
+          className="flex gap-2 items-center bg-[#FFFF00] hover:bg-yellow-500 py-3 rounded-xl px-6 shadow-sm hover:shadow-md transition-all duration-300 font-semibold text-gray-900 hover:scale-105"
         >
           <FaPlus className="text-sm" />
           Create New Quiz
         </button>
       </div>
 
-      {/* Cards Grid */}
+    
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {demoData.map((quiz) => (
           <QuizCards
@@ -363,14 +353,14 @@ const Quizzs = () => {
         ))}
       </div>
 
-      {/* View Details Modal */}
+  
       <QuizDetailsModal
         isOpen={viewOpen}
         onClose={() => setViewOpen(false)}
         quiz={selectedQuiz}
       />
 
-      {/* Create Modal */}
+     
 
          <ReusableModal
         isOpen={createOpen}
